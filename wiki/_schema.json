@@ -5,13 +5,26 @@
     "processes": "process",
     "concepts": "concept",
     "people-teams": "team",
+    "people": "person",
+    "organizations": "organization",
     "projects": "project",
     "locations": "location",
     "questions": "question"
   },
-  "edges": ["feeds", "fed-by", "depends-on", "supports", "owned-by", "part-of", "runs-at", "causes", "resolved-by"],
-  "inverse": { "feeds": "fed-by", "depends-on": "supports" },
-  "edgeTargetType": { "owned-by": "team", "runs-at": "location" },
+  "edges": ["feeds", "fed-by", "depends-on", "supports", "owned-by", "part-of", "runs-at", "causes", "resolved-by", "reports-to", "manages", "succeeds", "succeeded-by"],
+  "inverse": {
+    "feeds": "fed-by",
+    "depends-on": "supports",
+    "reports-to": "manages",
+    "succeeds": "succeeded-by"
+  },
+  "edgeTargetType": {
+    "owned-by": ["team", "person", "organization"],
+    "runs-at": "location",
+    "reports-to": "person",
+    "manages": "person"
+  },
+  "canonExempt": ["question", "location", "team", "person", "organization"],
   "question": {
     "status": ["open", "partially-answered", "answered"],
     "horizon": ["now", "next", "later", "parked"]
@@ -23,7 +36,9 @@
     "team": 120,
     "project": 160,
     "location": 120,
-    "question": 100
+    "question": 100,
+    "person": 100,
+    "organization": 150
   },
   "staleDays": 60
 }

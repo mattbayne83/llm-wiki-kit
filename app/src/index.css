@@ -48,6 +48,8 @@
   --color-project: light-dark(oklch(49% 0.12 330), oklch(75% 0.1 330));
   --color-location: light-dark(oklch(48% 0.1 150), oklch(73% 0.11 150));
   --color-question: light-dark(oklch(52% 0.13 55), oklch(73% 0.13 55));
+  --color-person: light-dark(oklch(50% 0.12 200), oklch(75% 0.1 200));
+  --color-organization: light-dark(oklch(45% 0.06 260), oklch(72% 0.06 260));
 }
 
 /* Browsers center <button> text by default, which breaks the moment a chip label

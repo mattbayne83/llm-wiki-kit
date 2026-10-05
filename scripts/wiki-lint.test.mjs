@@ -140,3 +140,41 @@ test('parseLog separates entries from malformed headings', () => {
   assert.equal(entries.length, 1)
   assert.equal(malformed.length, 1)
 })
+
+const PERSON = {
+  'wiki/people/pat.md': '---\ntype: person\nedges:\n  part-of: [crew]\n---\n\n# Pat\n\nRuns [[loader]].\n',
+  'wiki/people/sam.md': '---\ntype: person\nedges:\n  reports-to: [pat]\n---\n\n# Sam\n\nWorks with [[pat]].\n',
+}
+const PERSON_INDEX = BASE['wiki/index.md'] +
+  '\n## people\n\n| [Pat](people/pat.md) | p | 2026-10-04 |\n| [Sam](people/sam.md) | s | 2026-10-04 |\n'
+const withPeople = (overrides = {}) => fixture({ ...PERSON, 'wiki/index.md': PERSON_INDEX, ...overrides })
+
+test('E4 owned-by accepts a team, a person or an organization', () => {
+  const root = withPeople({
+    ...edit('wiki/systems/store.md', 'owned-by: [crew]', 'owned-by: [pat]'),
+    'wiki/people/pat.md': PERSON['wiki/people/pat.md'].replace('part-of: [crew]', 'part-of: [crew]\n  manages: [sam]'),
+  })
+  assert.ok(!codes(root).includes('E4'))
+})
+
+test('E4 reports-to must point at a person', () => {
+  const root = withPeople({
+    'wiki/people/sam.md': PERSON['wiki/people/sam.md'].replace('reports-to: [pat]', 'reports-to: [crew]'),
+  })
+  const e4 = lintWiki(root, { today: TODAY }).findings.find((f) => f.code === 'E4')
+  assert.match(e4.message, /must point at a person/)
+})
+
+test('E5 reports-to and manages are inverses and --fix adds the missing side', () => {
+  const root = withPeople()
+  const { findings, missingInverses } = lintWiki(root, { today: TODAY })
+  assert.equal(findings.filter((f) => f.code === 'E5').length, 1)
+  addInverseEdges(root, missingInverses)
+  assert.match(readFileSync(join(root, 'wiki/people/pat.md'), 'utf8'), /manages: \[sam\]/)
+  assert.ok(!codes(root).includes('E5'))
+})
+
+test('W4 skips types listed in canonExempt', () => {
+  const found = lintWiki(withPeople(), { today: TODAY }).findings
+  assert.ok(!found.some((f) => f.code === 'W4' && f.file.startsWith('wiki/people/')))
+})

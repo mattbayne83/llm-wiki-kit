@@ -13,11 +13,12 @@ last-verified: 2026-10-04
 
 `wiki/_schema.json` defines folders, page types, edge keys, inverse pairs, edge target types, question fields, soft page sizes and the staleness limit. The [[wiki-linter]] and the [[reader-app]] both import it. There is no second copy.
 
-## Start here (as of 2026-10-04)
+## Start here (as of 2026-10-05)
 
-- Seven folders, each mapped to one type: systems, processes, concepts, people-teams, projects, locations, questions.
-- Nine edge keys, two inverse pairs (`feeds`/`fed-by`, `depends-on`/`supports`). See [[typed-edges]].
-- `owned-by` must point at a team; `runs-at` must point at a location.
+- Nine folders, each mapped to one type: systems, processes, concepts, people-teams, people, organizations, projects, locations, questions.
+- Thirteen edge keys, four inverse pairs (`feeds`/`fed-by`, `depends-on`/`supports`, `reports-to`/`manages`, `succeeds`/`succeeded-by`). See [[typed-edges]].
+- An edge target type is one type or a list: `owned-by` accepts a team, person or organization; `runs-at` must point at a location; `reports-to` and `manages` point at people.
+- `canonExempt` lists the types that need no concern row in `_canon.json`: entities (teams, people, organizations, locations) and questions.
 
 ## Why one file
 

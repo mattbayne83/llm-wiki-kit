@@ -32,8 +32,8 @@ Ideas and rules the system runs on.
 
 | Article | Summary | Updated |
 | --- | --- | --- |
-| [Shared schema](concepts/shared-schema.md) | One JSON file defines folders, types and edges for every tool | 2026-10-04 |
-| [Typed edges](concepts/typed-edges.md) | Frontmatter relations by kind, with inverse rules | 2026-10-04 |
+| [Shared schema](concepts/shared-schema.md) | One JSON file defines folders, types and edges for every tool | 2026-10-05 |
+| [Typed edges](concepts/typed-edges.md) | Frontmatter relations by kind, with inverse rules | 2026-10-05 |
 | [Canon map](concepts/canon-map.md) | One home per idea, enforced from JSON | 2026-10-04 |
 | [Fact registry](concepts/fact-registry.md) | Hot strings that fail lint off their home page | 2026-10-04 |
 | [Known unknowns](concepts/known-unknowns.md) | Four layers for what the wiki does not know | 2026-10-04 |

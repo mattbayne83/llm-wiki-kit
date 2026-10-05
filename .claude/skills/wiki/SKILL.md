@@ -13,17 +13,21 @@ Two ideas drive this. Andrej Karpathy's: "the LLM writes and maintains the wiki;
 
 ```yaml
 ---
-type: system | process | concept | team | project | location | question
+type: system | process | concept | team | person | organization | project | location | question
 edges:
   feeds: [slug]          # data or output flows to
   fed-by: [slug]         # inverse of feeds, declared on both pages
   depends-on: [slug]     # needs this to work
   supports: [slug]       # inverse of depends-on
-  owned-by: [slug]       # must be a team page
+  owned-by: [slug]       # a team, person or organization page
   part-of: [slug]        # containment
   runs-at: [slug]        # must be a location page
   causes: [slug]         # causal contribution
   resolved-by: [slug]    # who or what fixes it
+  reports-to: [slug]     # a person page; inverse of manages
+  manages: [slug]        # a person page; inverse of reports-to
+  succeeds: [slug]       # took over from (acquisition, role handoff)
+  succeeded-by: [slug]   # inverse of succeeds
 last-verified: 2026-10-04    # optional; lint warns when it ages past the schema's staleDays
 # question pages only
 status: open | partially-answered | answered

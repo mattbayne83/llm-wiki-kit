@@ -1,5 +1,5 @@
 ---
-type: {system | process | concept | team | project | location | question}
+type: {system | process | concept | team | person | organization | project | location | question}
 edges:
   {edge-key}: [{slug}, {slug}]
 last-verified: {YYYY-MM-DD}

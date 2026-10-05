@@ -2,6 +2,14 @@
 
 Newest first. Never edit an old entry. Heading shape: `## [YYYY-MM-DD] kind | title`.
 
+## [2026-10-05] decision | Person and organization page types
+
+- Updated: concepts/shared-schema.md
+- Updated: concepts/typed-edges.md
+- New folders people/ and organizations/; edges reports-to/manages and succeeds/succeeded-by
+- edgeTargetType accepts a list, so owned-by can point at a team, person or organization
+- The W4 exemption list moved from linter code into the schema as canonExempt
+
 ## [2026-10-04] feat | Article stats, collapsible sidebar, phone header
 
 - Updated: systems/reader-app.md

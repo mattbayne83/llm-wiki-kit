@@ -6,7 +6,7 @@
 //   E1  frontmatter missing, type missing or invalid, type does not match folder
 //   E2  edge key unknown, duplicated, or not an inline [list]
 //   E3  edge target does not resolve to a page
-//   E4  edge target has the wrong type (schema edgeTargetType, e.g. owned-by -> team)
+//   E4  edge target has the wrong type (schema edgeTargetType: a type or a list of types)
 //   E5  inverse edge missing (feeds/fed-by, depends-on/supports). --fix adds it.
 //   E6  [[wikilink]] does not resolve, or uses an #anchor the reader cannot follow
 //   E7  relative .md link or evidence raw path does not exist on disk
@@ -193,9 +193,9 @@ export function lintWiki(root, { today = new Date() } = {}) {
           err('E3', p.rel, keyLine(key), `edge ${key}: [${t}] does not resolve to a page`)
           continue
         }
-        const want = schema.edgeTargetType[key]
-        if (want && target.type !== want) {
-          err('E4', p.rel, keyLine(key), `${key}: [${t}] is a ${target.type} page; ${key} must point at a ${want}`)
+        const want = [schema.edgeTargetType[key] ?? []].flat()
+        if (want.length && !want.includes(target.type)) {
+          err('E4', p.rel, keyLine(key), `${key}: [${t}] is a ${target.type} page; ${key} must point at a ${want.join(' or ')}`)
         }
       }
     }
@@ -289,7 +289,7 @@ export function lintWiki(root, { today = new Date() } = {}) {
       }
       if (!onHome) warn('W5', fact.home, 1, `no pattern of fact "${fact.id}" appears on its home page`)
     }
-    const exempt = new Set(['question', 'location', 'team'])
+    const exempt = new Set(schema.canonExempt ?? ['question', 'location', 'team'])
     for (const p of pages.values()) {
       if (exempt.has(p.type)) continue
       const covered = (canon.concerns ?? []).some((c) => c.home === p.rel || c.notes?.includes(p.slug))

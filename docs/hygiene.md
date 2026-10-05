@@ -142,6 +142,8 @@ Type placement:
 | team | A group that owns or runs things | One person's open question |
 | project | A named effort with a direction | A standing process |
 | location | One physical or named place | A ranking of places |
+| person | One named individual and their role | A group (that is a team) |
+| organization | A company or legal entity | A team inside one company |
 | question | An open research thread | A settled definition (fold it into the concept) |
 
 Don't add a top-level folder without updating `wiki/_schema.json` in the same change.
