@@ -2,6 +2,10 @@
 
 Newest first. Never edit an old entry. Heading shape: `## [YYYY-MM-DD] kind | title`.
 
+## [2026-10-04] feat | npm test runs on Node 24
+
+- `node --test scripts/` exits 1 on Node 24 (a bare directory is read as a module path); the test script now passes a glob, which Node 22+ expands
+
 ## [2026-10-04] feat | Article stats, collapsible sidebar, phone header
 
 - Updated: systems/reader-app.md
