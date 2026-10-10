@@ -334,6 +334,8 @@ nav.deck-nav > button:disabled {
   font-size: 0.7rem;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
+  /* A long deck squeezes the nav; the counter must not wrap to three lines */
+  white-space: nowrap;
 }
 
 .dots {

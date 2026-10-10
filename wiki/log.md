@@ -2,6 +2,10 @@
 
 Newest first. Never edit an old entry. Heading shape: `## [YYYY-MM-DD] kind | title`.
 
+## [2026-10-05] feat | Slide counter stays on one line in long decks
+
+- presentations/shell/base.css: `.slide-number` gets `white-space: nowrap`. In a deck of about 50 slides the dot row squeezed the counter into three stacked lines
+
 ## [2026-10-04] feat | Article stats, collapsible sidebar, phone header
 
 - Updated: systems/reader-app.md
